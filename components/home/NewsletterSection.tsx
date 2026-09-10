@@ -120,9 +120,30 @@ export default function NewsletterSection() {
 
       {/* Bottom Bar: Copyright on bottom-left / center, Social Links on bottom-right */}
       <div className="w-full px-6 sm:px-12 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 z-10 bg-black/60 backdrop-blur-sm sm:bg-transparent">
-        <p className="text-xs text-zinc-300 font-normal tracking-wide">
-          {SITE_CONFIG.copyright}
-        </p>
+        <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-xs text-zinc-300 font-normal tracking-wide text-center sm:text-left">
+          <p>{SITE_CONFIG.copyright}</p>
+          <span className="hidden sm:inline text-white/20">•</span>
+          <p className="flex items-center gap-1.5 text-zinc-400">
+            <span>Developed by</span>
+            <a
+              href="https://quantumflowit.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-bold text-zinc-200 hover:text-[#4FD1FF] transition-all group"
+            >
+              <span className="relative w-4 h-4 rounded-[4px] overflow-hidden inline-flex items-center justify-center bg-white shadow-xs border border-white/20 shrink-0 transition-transform group-hover:scale-110">
+                <Image
+                  src="/images/qf-logo-avatar.png"
+                  alt="Quantum Flow Logo"
+                  width={16}
+                  height={16}
+                  className="w-full h-full object-contain p-[1px]"
+                />
+              </span>
+              <span className="group-hover:underline underline-offset-2">Quantum Flow</span>
+            </a>
+          </p>
+        </div>
 
         <div className="flex items-center">
           <SocialLinks iconSize={28} itemClassName="hover:scale-110 transition-transform duration-200" />
