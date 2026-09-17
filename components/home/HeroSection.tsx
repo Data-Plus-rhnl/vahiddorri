@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { SITE_CONFIG } from "@/lib/data";
 import SocialLinks from "@/components/ui/SocialLinks";
 
@@ -52,12 +51,12 @@ export default function HeroSection() {
 
         {/* Subtitle / Role */}
         <div className="mt-1">
-          <Link
+          <a
             href="/music"
             className="inline-block text-[11px] sm:text-xs font-bold tracking-[0.25em] uppercase text-zinc-200 hover:text-[#d4af37] transition-all duration-300"
           >
             {SITE_CONFIG.tagline}
-          </Link>
+          </a>
         </div>
       </div>
 

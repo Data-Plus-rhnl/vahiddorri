@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { FEATURED_ALBUM } from "@/lib/data";
 
 export default function VoicePlayer() {
@@ -286,12 +285,12 @@ export default function VoicePlayer() {
 
           {/* Back to Music Link */}
           <div className="mt-8 pt-4 border-t border-zinc-900 flex justify-between items-center">
-            <Link
+            <a
               href="/music"
               className="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest text-[#d4af37] hover:underline font-semibold"
             >
               ← Back to Music
-            </Link>
+            </a>
           </div>
         </div>
       </div>

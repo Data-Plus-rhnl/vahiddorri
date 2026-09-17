@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { AlbumItem } from "@/types";
 
 interface AlbumCardProps {
@@ -12,7 +11,7 @@ export default function AlbumCard({ album }: AlbumCardProps) {
   return (
     <div className="group relative luxury-card rounded-2xl overflow-hidden shadow-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center gap-6 sm:gap-10">
       {/* Album Artwork */}
-      <Link
+      <a
         href={targetHref}
         data-cursor="play"
         className="relative w-56 sm:w-64 aspect-square rounded-xl overflow-hidden border border-[#d4af37]/40 shadow-[0_10px_30px_rgba(0,0,0,0.8)] flex-shrink-0 cursor-pointer block"
@@ -43,7 +42,7 @@ export default function AlbumCard({ album }: AlbumCardProps) {
             {album.tracks.length} Tracks
           </span>
         </div>
-      </Link>
+      </a>
 
       {/* Album Overview & Metadata */}
       <div className="flex-1 flex flex-col justify-between w-full text-center md:text-left">
@@ -59,7 +58,7 @@ export default function AlbumCard({ album }: AlbumCardProps) {
           </div>
 
           <h2 className="font-serif-heading text-3xl sm:text-4xl font-bold text-white tracking-wide group-hover:text-[#d4af37] transition-colors">
-            <Link href={targetHref} data-cursor="play">{album.title}</Link>
+            <a href={targetHref} data-cursor="play">{album.title}</a>
           </h2>
 
           <p className="text-xs uppercase tracking-widest text-zinc-400 mt-1 font-medium">
@@ -83,13 +82,13 @@ export default function AlbumCard({ album }: AlbumCardProps) {
 
         {/* Action Button to Open Player Page */}
         <div className="mt-8 pt-6 border-t border-zinc-800/80 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <Link
+          <a
             href={targetHref}
             data-cursor="play"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#d4af37] hover:bg-[#dfbc7a] text-black font-bold text-xs uppercase tracking-[0.2em] rounded-md shadow-lg transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer"
           >
             <span>Listen & Open Player</span>
-          </Link>
+          </a>
 
           <span className="text-xs uppercase tracking-wider text-zinc-400 font-medium">
             Digital Version Available

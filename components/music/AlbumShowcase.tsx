@@ -2,7 +2,6 @@
 
 import { useState, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { FEATURED_ALBUM } from "@/lib/data";
 
 export default function AlbumShowcase() {
@@ -46,7 +45,7 @@ export default function AlbumShowcase() {
       <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12">
         {/* Album Artwork with Direct Link to /voice */}
         <div className="flex flex-col items-center flex-shrink-0">
-          <Link
+          <a
             href="/voice"
             className="relative w-64 sm:w-72 aspect-square rounded-lg overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.8)] border border-[#d4af37]/40 group block cursor-pointer"
           >
@@ -70,14 +69,14 @@ export default function AlbumShowcase() {
                 {FEATURED_ALBUM.tracks.length} Tracks
               </span>
             </div>
-          </Link>
+          </a>
 
-          <Link
+          <a
             href="/voice"
             className="mt-4 text-xs font-bold uppercase tracking-[0.25em] text-[#d4af37] hover:underline text-center"
           >
             {FEATURED_ALBUM.title} →
-          </Link>
+          </a>
         </div>
 
         {/* Album Info & Tracklist */}
@@ -89,9 +88,9 @@ export default function AlbumShowcase() {
                   Featured Release
                 </span>
                 <h2 className="font-serif-heading text-2xl sm:text-3xl font-bold text-white mt-0.5">
-                  <Link href="/voice" className="hover:text-[#d4af37] transition-colors">
+                  <a href="/voice" className="hover:text-[#d4af37] transition-colors">
                     {FEATURED_ALBUM.title}
-                  </Link>
+                  </a>
                 </h2>
                 <p className="text-xs text-zinc-400 mt-0.5">
                   By <span className="text-zinc-200">{FEATURED_ALBUM.subtitle}</span> • Released {FEATURED_ALBUM.releaseYear}
@@ -100,12 +99,12 @@ export default function AlbumShowcase() {
 
               {/* Streaming & Player Buttons */}
               <div className="flex items-center gap-2">
-                <Link
+                <a
                   href="/voice"
                   className="px-3.5 py-1.5 bg-[#d4af37] hover:bg-[#dfbc7a] text-black text-[10.5px] font-bold uppercase tracking-wider rounded transition-transform hover:scale-105 active:scale-95"
                 >
                   Open Player
-                </Link>
+                </a>
               </div>
             </div>
 

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { SITE_CONFIG } from "@/lib/data";
 import SocialLinks from "@/components/ui/SocialLinks";
 import TextReveal from "@/components/ui/TextReveal";
@@ -173,12 +172,12 @@ export default function ParallaxExperience() {
 
           {/* Subtitle */}
           <div className="mt-0.5">
-            <Link
+            <a
               href="/music"
               className="inline-block text-[9px] sm:text-[10.5px] md:text-xs font-bold tracking-[0.24em] sm:tracking-[0.32em] uppercase text-zinc-300 hover:text-[#d4af37] transition-all duration-300 py-1"
             >
               {SITE_CONFIG.tagline}
-            </Link>
+            </a>
           </div>
         </div>
 
