@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NAV_ITEMS } from "@/lib/data";
 import SocialLinks from "@/components/ui/SocialLinks";
@@ -37,23 +36,21 @@ export default function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 bg-black/50 backdrop-blur-md border-b border-white/5">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-10 h-16 flex items-center justify-between">
         {/* Brand Logo */}
-        <Link
+        <a
           href="/"
-          prefetch={true}
           className="font-serif-heading text-sm sm:text-base md:text-lg font-bold tracking-[0.22em] sm:tracking-[0.25em] text-white hover:text-[#d4af37] transition-colors duration-300 uppercase"
         >
           Vahid Dorri
-        </Link>
+        </a>
 
         {/* Tablet & Desktop Navigation */}
         <nav className="hidden sm:flex items-center gap-6 md:gap-8" aria-label="Main Navigation">
           {NAV_ITEMS.map((item) => {
             const isActive = pathname === item.href;
             return (
-              <Link
+              <a
                 key={item.id}
                 href={item.href}
-                prefetch={true}
                 className={`text-xs tracking-[0.2em] uppercase font-medium transition-all duration-200 relative py-1 ${
                   isActive
                     ? "text-[#d4af37] font-semibold"
@@ -64,7 +61,7 @@ export default function Navbar() {
                 {isActive && (
                   <span className="absolute bottom-0 left-0 w-full h-[1.5px] bg-[#d4af37] shadow-[0_0_8px_rgba(212,175,55,0.6)]" />
                 )}
-              </Link>
+              </a>
             );
           })}
         </nav>
@@ -110,17 +107,15 @@ export default function Navbar() {
               {NAV_ITEMS.map((item) => {
                 const isActive = pathname === item.href;
                 return (
-                  <Link
+                  <a
                     key={item.id}
                     href={item.href}
-                    prefetch={true}
-                    onClick={() => setIsOpen(false)}
                     className={`text-sm tracking-[0.22em] uppercase font-medium py-2 border-b border-white/5 transition-colors ${
                       isActive ? "text-[#d4af37] font-semibold" : "text-zinc-300 hover:text-white"
                     }`}
                   >
                     {item.label}
-                  </Link>
+                  </a>
                 );
               })}
             </nav>
