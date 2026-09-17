@@ -1,0 +1,72 @@
+# Build the Next.js static export and deploy it to the server over SSH.
+#
+# The server cannot `git pull` (no repo access), so the runner builds `out/`
+# and pushes the static files to /var/www/vahiddorri with rsync over SSH
+# using password authentication (sshpass).
+#
+# Required secrets (repo Settings → Actions → Secrets):
+#   SSH_HOST      - server hostname or IP
+#   SSH_USER      - SSH user with write access to /var/www/vahiddorri
+#   SSH_PASSWORD  - SSH password for that user
+#   SSH_PORT      - optional, defaults to 22
+#
+# Note: the server's sshd must have PasswordAuthentication enabled.
+
+name: Build & Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  DEPLOY_DIR: /var/www/vahiddorri
+  SSH_PORT: ${{ secrets.SSH_PORT }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # runner label depends on your Gitea runner config
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static export
+        run: npm run build
+
+      - name: Verify export output
+        run: test -f out/index.html
+
+      # Minimal runner images may lack these — install if missing
+      - name: Install rsync, SSH client and sshpass
+        run: |
+          if ! command -v rsync >/dev/null 2>&1 || ! command -v sshpass >/dev/null 2>&1; then
+            apt-get update && apt-get install -y rsync openssh-client sshpass
+          fi
+
+      - name: Trust server host key
+        run: |
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          ssh-keyscan -p "${SSH_PORT:-22}" -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Deploy static files
+        run: |
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" rsync -az --delete \
+            --chmod=Du=rwx,Dg=rx,Do=rx,Fu=rw,Fg=r,Fo=r \
+            -e "ssh -p ${SSH_PORT:-22}" \
+            out/ "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${DEPLOY_DIR}/"
+
+      - name: Verify deployment
+        run: |
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" \
+            ssh -p "${SSH_PORT:-22}" \
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" \
+            "test -f ${DEPLOY_DIR}/index.html && echo 'Deploy OK'"
